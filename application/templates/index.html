@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<title>Fake News📰 Detection System</title>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+	
+<style>
+	
+	body {
+	  background-image: url("{{url_for('static', filename='maxresdefault.jpg')}}");
+	  background-repeat: no-repeat;
+	 background-size: 100% 100%;
+	}
+
+        
+		</style>	
+<body>
+ <section id="partie1">
+	<div class="login">
+		<h1 style="color:rgb(20, 20, 123);"> Fake News📰 Detector</h1>
+
+		<form action="{{ url_for('predict')}}" method="POST">
+
+
+			<textarea name="message" rows="6" cols="50" required="required" style="font-size: 20pt"></textarea>
+			<br> </br>
+			<button type="submit" class="btn btn-primary btn-block btn-large">Predict&Analyse</button>
+			<div class="results">
+
+				{% if prediction == [0]%}
+				<h2 style="color:red;"><b>Looking Spam⚠️News📰<h2 style="color:rgba(255, 255, 255, 0.903);">Analyse de Sentiment: <b>{% print(sentiment)%}</h2>
+					</h2>
+				{% elif prediction == [1]%}
+				<h2 style="color:green;"><b>Looking Real News📰</h2><br><h2 style="color:rgb(250, 246, 247);">Analyse de Sentiment: {% print(sentiment)%}</h2>
+				{% endif %}
+				
+	        </div>
+
+		</form>
+		<main>
+		
+		</main>
+
+
+	</div>
+	</section></div>
+	<div class="partie">
+	<section>
+	<div class="login">
+		<main>
+			<table >
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>News</th>
+						<th>similarity </th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+
+					{%for v in values_new_cos%}
+
+					<tr>
+						<td data-label="ID:">{%print(v)%}</td>
+						
+						<td data-label="News">{%print(keys_new_cos[v])%}</td>
+						<td data-label="similarity">{%print(values_new_cos[v])%}</td>
+
+
+					</tr>
+
+					{%endfor%}
+
+
+
+				</tbody>
+			</table>
+		</main>
+
+	</div>
+</section></div>
+
+
+	</body>
+   
